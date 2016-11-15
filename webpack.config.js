@@ -43,5 +43,5 @@ module.exports = {
         loader: 'url?limit=10000&mimetype=image/svg+xml'
       }
     ]
-  },
+  }
 };
