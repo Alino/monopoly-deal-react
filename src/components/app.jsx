@@ -2,7 +2,6 @@ import { createStore } from 'redux';
 import { monopolyApp } from '../store/reducers.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Game from '../game.js';
 import PlayerHands from './playerHands.jsx';
 
 
@@ -18,7 +17,7 @@ class App extends React.Component {
     store.dispatch({
       type: 'NEW_GAME'
     });
-    console.log(this.state.game[0].cards);
+    console.log(this.state.cards);
     // todo display game.cards in game info component
   }
 
@@ -33,17 +32,17 @@ class App extends React.Component {
             <div id="newGame" className="navbar-btn">
               <button className="btn btn-default" onClick={this.onClick.bind(this)}>new game</button>
               <br/>
-              <strong>cards on pile</strong> {JSON.stringify(this.state.game[0].cards.length)} <br/>
-              <strong>cards in player1 hands</strong> {JSON.stringify(this.state.game[0].player1.cardsOnHand)} <br/>
+              <strong>cards on pile</strong> {JSON.stringify(this.state.cards.length)} <br/>
+              <strong>cards in player1 hands</strong> {JSON.stringify(this.state.players[0].cardsOnHand)} <br/>
               <hr/>
-              <strong>cards in player1 bank</strong> {JSON.stringify(this.state.game[0].player1.cardsInBank)} <br/>
-              <strong>player1 money</strong> {this.state.game[0].player1.getTotalMoneyInBank()} <br/>
+              <strong>cards in player1 bank</strong> {JSON.stringify(this.state.players[0].cardsInBank)} <br/>
+              <strong>player1 money</strong> {this.state.players[0].getTotalMoneyInBank()} <br/>
             </div>
           </div>
         </div>
 
         <div className="container">
-          <PlayerHands player={this.state.game[0].player1} />
+          <PlayerHands player={this.state.players[0]} />
         </div>
       </div>
     )

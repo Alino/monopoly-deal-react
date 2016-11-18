@@ -10,18 +10,28 @@ export function monopolyApp(state = initialState(), action) {
   switch (action.type) {
     case 'NEW_GAME':
       return initialState();
-    case 'MOVE_CARD':
-      return moveCard(state, action);
+    case 'MOVE_CARD_FROM_HANDS_TO_BANK':
+      return moveCardFromHandsToBank(state, action);
+    case 'USE_ACTION_CARD':
+      return state;
+    case 'PERFORM_PLAYER_TURN':
+      return state;
+    case 'PUT_HOUSE_ON_COMPLETE_COLLECTION':
+      return state;
+    case 'SWAP_TWO_COLOR_WILDCARD':
+      return state;
     default:
       return state;
   }
 }
 
-function moveCard(state, action) {
+function moveCardFromHandsToBank(state, action) {
   const newState = _.cloneDeep(state);
-  const fromArray = action.from.split('.');
-  const toArray = action.to.split('.');
-  const cardToMove = newState[fromArray[0]][fromArray[1]].shift();
-  newState[toArray[0]][toArray[1]].push(cardToMove);
-  return newState;
+  newState.players.forEach((player, index) => {
+    if (action.playerName === player.name) {
+      const cardToMove = newState.players[index].cardsOnHand.shift();
+      newState.players[index].cardsInBank.push(cardToMove);
+    }
+  });
+  return newState
 }

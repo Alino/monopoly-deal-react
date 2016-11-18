@@ -33,8 +33,9 @@ export default class Game {
   }
   
   createPlayers() {
-    this.player1 = new Player();
-    this.player2 = new Player();
+    this.players = [];
+    this.players.push(new Player('player1'));
+    this.players.push(new Player('player2'));
   }
 
   shuffleCards() {
@@ -50,8 +51,9 @@ export default class Game {
     console.log('dealing cards to players');
     // give 5 cards to each player from card pile
     for (let i = 0; i < 5; i++) {
-      this.player1.addCardToHand(this.cards.pop());
-      this.player2.addCardToHand(this.cards.pop());
+      this.players.forEach(player =>
+        player.addCardToHand(this.cards.pop())
+      )
     }
   }
   

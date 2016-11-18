@@ -1,11 +1,11 @@
 export class Player {
-  constructor() {
-    console.log('created new player');
+  constructor(name) {
+    this.name = name;
     this.cardsOnHand = [];
     this.cardsInBank = [];
     this.cardsInEstates = [];
     this.isOnTurn = true;
-    this.name = 'player1';
+    console.log(`created new player with name ${this.name}`);
   }
 
   getTotalMoneyInBank() {
