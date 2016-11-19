@@ -7,33 +7,6 @@ export class Card {
     this.type = 'Card pseudo class type';
     this.moneyValue = moneyValue;
   }
-
-  moveToBank(player) {
-    if (!player) {
-      console.error(new Error('player is not defined'), 'moveToBank');
-      return;
-    }
-    if (!player.isOnTurn) {
-      console.error(new Error('player not on his turn', 'moveToBank'));
-      return;
-    }
-    if (this.owner !== player.name) {
-      console.error(new Error('player does not own the card', 'moveToBank'));
-      return;
-    }
-    if (!this.moneyValue) {
-      console.error(new Error('the card has no monetary value', 'moveToBank'));
-      return;
-    }
-    player.cardsOnHand.forEach((card, index) => {
-      if (card.id == this.id) {
-        player.cardsOnHand.splice(index, 1);
-        player.cardsInBank.push(card);
-        console.log(player);
-      }
-    });
-    console.log(`Player "${player.name}" has moved ${this.type} card with value ${this.moneyValue} to his bank`);
-  }
 }
 Card.id = 0;
 

@@ -27,10 +27,26 @@ export function monopolyApp(state = initialState(), action) {
 
 function moveCardFromHandsToBank(state, action) {
   const newState = _.cloneDeep(state);
+
   newState.players.forEach((player, index) => {
     if (action.playerName === player.name) {
-      const cardToMove = newState.players[index].cardsOnHand.shift();
-      newState.players[index].cardsInBank.push(cardToMove);
+
+      if (!player.isOnTurn) {
+        console.error(new Error('player not on his turn', 'moveCardFromHandsToBank'));
+        return state;
+      }
+      if (!action.card.moneyValue) {
+        console.error(new Error('the card has no monetary value', 'moveCardFromHandsToBank'));
+        return state;
+      }
+
+      player.cardsOnHand.forEach((card, index) => {
+        if (card.id === action.card.id) {
+          player.cardsOnHand.splice(index, 1);
+          player.cardsInBank.push(card);
+          console.log(`Player "${player.name}" has moved ${action.card.type} card with value ${action.card.moneyValue} to his bank`);
+        }
+      });
     }
   });
   return newState

@@ -1,9 +1,9 @@
 import React from 'react';
 
-// todo -> start using redux, so I don't have to use this.forceUpdate() everytime some props change?
-
 export default class PlayerHands extends React.Component {
   render() {
+    const store = this.props.store;
+
     return (
       <div>
         <div className="playerHands">
@@ -13,7 +13,18 @@ export default class PlayerHands extends React.Component {
               moneyValue: {card.moneyValue} <br/>
               {card.actions.map(action => (
                 <div className="actions" key={Math.random()}>
-                  actions: <a href="#"><span onClick={() => {card.moveToBank(this.props.player); this.forceUpdate();} }>{action}</span></a>
+                  actions:
+                  <a href="#">
+                  <span onClick={() => {
+                    store.dispatch({
+                      type: 'MOVE_CARD_FROM_HANDS_TO_BANK',
+                      card: card,
+                      playerName: this.props.player.name
+                    });
+                  } }>
+                    {action}
+                  </span>
+                  </a>
                 </div>
               ))}
             </div>
