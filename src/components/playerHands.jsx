@@ -1,4 +1,5 @@
 import React from 'react';
+import { MoneyCard } from './MoneyCard.jsx';
 
 export default class PlayerHands extends React.Component {
   render() {
@@ -6,7 +7,7 @@ export default class PlayerHands extends React.Component {
 
     return (
       <div>
-        <div className="playerHands">
+        <div className="playerHands" style={{display: 'flex'}}>
           {this.props.player.cardsOnHand.map(card => (
             <div className="cardInHand" key={Math.random()}>
               cardType: {card.type} <br/>
@@ -27,6 +28,7 @@ export default class PlayerHands extends React.Component {
                   </a>
                 </div>
               ))}
+              <MoneyCard value={card.moneyValue}></MoneyCard>
             </div>
           ))}
         </div>
