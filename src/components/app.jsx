@@ -67,6 +67,9 @@ class App extends React.Component {
               <hr/>
               <strong>cards in player1 bank</strong> {JSON.stringify(state.players[0].cardsInBank)} <br/>
               <strong>player1 money</strong> {state.players[0].getTotalMoneyInBank()} <br/>
+              <hr/>
+              <strong>cards in player2 bank</strong> {JSON.stringify(state.players[1].cardsInBank)} <br/>
+              <strong>player2 money</strong> {state.players[1].getTotalMoneyInBank()} <br/>
             </div>
           </div>
         </div>

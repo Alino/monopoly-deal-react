@@ -25,15 +25,27 @@ export function monopolyApp(state = initialState(), action) {
   }
 }
 
+export function getNextPlayerName(players, currentPlayerName) {
+  for (let p = 0; p < players.length; p++) {
+    if (players[p].name === currentPlayerName) {
+      if (p === players.length - 1) {
+        return players[0].name;
+      }
+      return players[++p].name;
+    }
+  }
+}
 
 function endPlayerTurn(state, action) {
   const newState = _.cloneDeep(state);
+  const currentPlayer = newState.currentTurn.playerName;
+  const nextPlayer = getNextPlayerName(newState.players, currentPlayer);
 
   newState.currentTurn = {
-    playerName: 'player2',
+    playerName: nextPlayer,
     actionsLeft: 3,
   };
-  console.log('player1 has finished his turn, now player2 is on turn.');
+  console.log(`${currentPlayer} has finished his turn, now ${nextPlayer} is on turn.`);
   return newState;
 }
 
