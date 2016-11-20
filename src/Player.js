@@ -16,19 +16,6 @@ export class Player {
     card.owner = this.name;
     this.cardsOnHand.push(card);
   }
-
-  addCardToBank(card) {
-    card.owner = this.name;
-    this.cardsInBank.push(card);
-  }
-
-  payToOtherPlayer(cards, otherPlayer) {
-    const selectedCardsMoneyValue = getTotalMoneyValueOfCards(cards);
-    const amountOfMoneyToPay = otherPlayer.requiresMoneyFrom[this.player.name];
-    if (!amountOfMoneyToPay) {
-      console.error(`${this.name} is not required to pay to ${otherPlayer.name}`)
-    }
-  }
 }
 
 function getTotalMoneyValueOfCards(cards) {

@@ -38,9 +38,16 @@ class App extends React.Component {
                       }}>
                 new game
               </button>
+              <button className="btn btn-danger"
+                      style={{marginLeft: '30px'}}
+                      onClick={() => {
+                        alert('other player is going to do something');
+                      }}
+              >
+                end turn
+              </button>
               <br/>
               <strong>cards on pile</strong> {JSON.stringify(state.cards.length)} <br/>
-              <strong>cards in player1 hands</strong> {JSON.stringify(state.players[0].cardsOnHand)} <br/>
               <hr/>
               <strong>cards in player1 bank</strong> {JSON.stringify(state.players[0].cardsInBank)} <br/>
               <strong>player1 money</strong> {state.players[0].getTotalMoneyInBank()} <br/>
