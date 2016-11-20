@@ -3,9 +3,30 @@ import { monopolyApp } from '../store/reducers.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PlayerHands from './playerHands.jsx';
+import Game from '../Game.js';
+import AI from '../AI.js';
 
 
 const store = createStore(monopolyApp);
+const game = new Game(store);
+const bot = new AI(store);
+
+const EndTurnButton = (state) => {
+  if (state.state.currentTurn.playerName === 'player1') {
+    return (
+      <button className="btn btn-danger"
+              style={{ marginLeft: '30px' }}
+              onClick={() => {
+                store.dispatch({
+                  type: 'END_PLAYER_TURN'
+                })
+              }}
+      >
+        end turn
+      </button>
+    )
+  } else return null;
+};
 
 class App extends React.Component {
   constructor() {
@@ -38,14 +59,9 @@ class App extends React.Component {
                       }}>
                 new game
               </button>
-              <button className="btn btn-danger"
-                      style={{marginLeft: '30px'}}
-                      onClick={() => {
-                        alert('other player is going to do something');
-                      }}
-              >
-                end turn
-              </button>
+
+              <EndTurnButton state={state} />
+
               <br/>
               <strong>cards on pile</strong> {JSON.stringify(state.cards.length)} <br/>
               <hr/>

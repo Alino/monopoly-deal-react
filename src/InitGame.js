@@ -1,19 +1,20 @@
 import { ActionCard, MoneyCard, EstateCard } from './Card.js';
 import { Player } from './Player.js';
 
-export default class Game {
+export default class InitGame {
   constructor() {
+    console.log('starting new game');
     this.cards = [];
-    this.startNewGame();
-  }
-
-    startNewGame() {
-      console.log('starting new game');
-      this.createCards();
-      this.createPlayers();
-      this.shuffleCards();
-      this.dealCards();
+    this.players = [];
+    this.createCards();
+    this.createPlayers();
+    this.shuffleCards();
+    this.dealCards();
+    this.currentTurn = {
+      playerName: 'player1',
+      actionsLeft: 3
     }
+  }
 
     createCards() {
     console.log('creating 110 cards');
@@ -33,7 +34,6 @@ export default class Game {
   }
   
   createPlayers() {
-    this.players = [];
     this.players.push(new Player('player1'));
     this.players.push(new Player('player2'));
   }

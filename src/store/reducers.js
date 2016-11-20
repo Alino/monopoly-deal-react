@@ -1,9 +1,9 @@
-import Game from '../game.js';
+import InitGame from '../InitGame.js';
 import { moveCardToBank } from './actions.js';
 import * as _ from 'lodash';
 
 export const initialState = () => {
-  return new Game();
+  return new InitGame();
 };
 
 export function monopolyApp(state = initialState(), action) {
@@ -14,8 +14,8 @@ export function monopolyApp(state = initialState(), action) {
       return moveCardFromHandsToBank(state, action);
     case 'USE_ACTION_CARD':
       return state;
-    case 'PERFORM_PLAYER_TURN':
-      return state;
+    case 'END_PLAYER_TURN':
+      return endPlayerTurn(state, action);
     case 'PUT_HOUSE_ON_COMPLETE_COLLECTION':
       return state;
     case 'SWAP_TWO_COLOR_WILDCARD':
@@ -23,6 +23,18 @@ export function monopolyApp(state = initialState(), action) {
     default:
       return state;
   }
+}
+
+
+function endPlayerTurn(state, action) {
+  const newState = _.cloneDeep(state);
+
+  newState.currentTurn = {
+    playerName: 'player2',
+    actionsLeft: 3,
+  };
+  console.log('player1 has finished his turn, now player2 is on turn.');
+  return newState;
 }
 
 function moveCardFromHandsToBank(state, action) {
@@ -47,6 +59,7 @@ function moveCardFromHandsToBank(state, action) {
           console.log(`Player "${player.name}" has moved ${action.card.type} card with value ${action.card.moneyValue} to his bank`);
         }
       });
+      newState.currentTurn.actionsLeft--;
     }
   });
   return newState

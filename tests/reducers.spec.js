@@ -16,6 +16,7 @@ describe('monopolyApp reducer', function() {
       let expectedState = _.cloneDeep(state);
       const cardToMove = expectedState.players[0].cardsOnHand.shift();
       expectedState.players[0].cardsInBank.push(cardToMove);
+      expectedState.currentTurn.actionsLeft = 2;
       
       // EXECUTE
       const actualState = monopolyApp(state, action);
