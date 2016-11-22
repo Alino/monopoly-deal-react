@@ -8,7 +8,7 @@ export default class AI {
   }
 
   think() {
-    console.log('AI is thinking about the current store...', this.store.getState());
+    console.log('AI is thinking about the current store...', this.state);
 
     if (this.state.currentTurn.playerName === 'player2') {
       console.log(this.state);

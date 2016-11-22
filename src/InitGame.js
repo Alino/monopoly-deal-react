@@ -5,6 +5,7 @@ export default class InitGame {
   constructor() {
     console.log('starting new game');
     this.cards = [];
+    this.cardsTrash = [];
     this.players = [];
     this.createCards();
     this.createPlayers();
@@ -12,24 +13,43 @@ export default class InitGame {
     this.dealCards();
     this.currentTurn = {
       playerName: 'player1',
-      actionsLeft: 3
+      actionsLeft: 3,
+      tookTwoCardsFromCardPile: false
     }
   }
 
     createCards() {
     console.log('creating 110 cards');
+    // six 1M cards
     this.cards.push(new MoneyCard(1));
     this.cards.push(new MoneyCard(1));
     this.cards.push(new MoneyCard(1));
+    this.cards.push(new MoneyCard(1));
+    this.cards.push(new MoneyCard(1));
+    this.cards.push(new MoneyCard(1));
+
+    // five 2M cards
     this.cards.push(new MoneyCard(2));
     this.cards.push(new MoneyCard(2));
+    this.cards.push(new MoneyCard(2));
+    this.cards.push(new MoneyCard(2));
+    this.cards.push(new MoneyCard(2));
+
+    // three 3M cards
     this.cards.push(new MoneyCard(3));
     this.cards.push(new MoneyCard(3));
+    this.cards.push(new MoneyCard(3));
+
+    // three 4M cards
     this.cards.push(new MoneyCard(4));
     this.cards.push(new MoneyCard(4));
     this.cards.push(new MoneyCard(4));
+
+    // two 5M cards
     this.cards.push(new MoneyCard(5));
     this.cards.push(new MoneyCard(5));
+
+    // one 10M card
     this.cards.push(new MoneyCard(10));
   }
   

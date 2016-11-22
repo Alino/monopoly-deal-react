@@ -14,6 +14,8 @@ export function monopolyApp(state = initialState(), action) {
       return moveCardFromHandsToBank(state, action);
     case 'USE_ACTION_CARD':
       return state;
+    case 'START_PLAYER_TURN':
+      return startPlayerTurn(state, action);
     case 'END_PLAYER_TURN':
       return endPlayerTurn(state, action);
     case 'PUT_HOUSE_ON_COMPLETE_COLLECTION':
@@ -36,6 +38,22 @@ export function getNextPlayerName(players, currentPlayerName) {
   }
 }
 
+function startPlayerTurn(state, action) {
+  const newState = _.cloneDeep(state);
+  newState.players.forEach((player, index) => {
+    if (newState.currentTurn.playerName === player.name) {
+      console.log(`${player.name} starting new turn`);
+      newState.players[index].cardsOnHand.push(
+        newState.cards.pop(),
+        newState.cards.pop()
+      );
+      newState.currentTurn.tookTwoCardsFromCardPile = true;
+    }
+  });
+
+  return newState;
+}
+
 function endPlayerTurn(state, action) {
   const newState = _.cloneDeep(state);
   const currentPlayer = newState.currentTurn.playerName;
@@ -44,6 +62,7 @@ function endPlayerTurn(state, action) {
   newState.currentTurn = {
     playerName: nextPlayer,
     actionsLeft: 3,
+    tookTwoCardsFromCardPile: false
   };
   console.log(`${currentPlayer} has finished his turn, now ${nextPlayer} is on turn.`);
   return newState;
