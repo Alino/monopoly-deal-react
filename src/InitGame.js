@@ -1,4 +1,4 @@
-import { ActionCard, MoneyCard, EstateCard } from './Card.js';
+import { DebtCollector, MoneyCard, EstateCard } from './Card.js';
 import { Player } from './Player.js';
 
 export default class InitGame {
@@ -20,6 +20,10 @@ export default class InitGame {
 
     createCards() {
     console.log('creating 110 cards');
+    // 2 Debt Collectors
+    this.cards.push(new DebtCollector(5));
+    this.cards.push(new DebtCollector(5));
+
     // six 1M cards
     this.cards.push(new MoneyCard(1));
     this.cards.push(new MoneyCard(1));
